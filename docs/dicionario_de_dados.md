@@ -2,7 +2,6 @@
 
 **Fonte**: Base dos Dados — dataset `basedosdados.br_inep_avaliacao_alfabetizacao`
 **Cobertura temporal**: 2023–2024
-**Última atualização**: 05/07/2026 (Dia 1 do projeto)
 **Princípio metodológico**: todo campo documentado aqui foi confirmado diretamente na fonte (tabela `dicionario` do BigQuery ou documentação oficial do Inep). Nenhum significado foi inferido sem confirmação.
 
 ---
