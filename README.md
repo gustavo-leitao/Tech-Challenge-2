@@ -14,16 +14,16 @@ O objetivo é analisar a evolução da alfabetização no 2º ano do Ensino Fund
 - Silver: limpeza, padronização e integração das entidades (UF+metas, Município+metas, Brasil, Alunos), com quarentena explícita de registros inválidos.
 - Gold: views analíticas prontas para consumo (taxa vs. meta por UF, evolução temporal nacional, desempenho de alunos por rede).
 
-## 3. Tecnologias e Justificativa (Rastreabilidade)
+## 3. Tecnologias Utilizadas
 
-| Ferramenta | Onde foi ensinada | Uso no projeto |
-|---|---|---|
-| Arquitetura Medalhão | ETL Pipelines Aula 1 | Estrutura geral do pipeline |
-| BigQuery | ETL Pipelines Aula 3 | Bronze, Silver e Gold (data warehouse serverless) |
-| Pub/Sub + Dataflow | ETL Pipelines Aula 3 | Streaming simulado (arquitetura prevista) |
-| SQL analítico (GROUP BY, CASE, JOIN) | Bancos Relacionais Aula 2 | Integração Silver e views Gold |
-| Quarentena de dados inválidos | ETL Pipelines Aula 1 | Tabela alunos_quarentena |
-| FinOps | ETL Pipelines Aula 4 | Seção 6 |
+| Ferramenta | Uso no projeto |
+|---|---|
+| Arquitetura Medalhão | Estrutura geral do pipeline |
+| BigQuery | Camadas Bronze, Silver e Gold (data warehouse serverless) |
+| Pub/Sub + Dataflow | Streaming simulado |
+| SQL analítico (GROUP BY, CASE, JOIN) | Integração da camada Silver e views da Gold |
+| Quarentena de dados inválidos | Tabela alunos_quarentena |
+| FinOps | Seção 6 |
 
 ## 4. Fonte de Dados
 
@@ -31,8 +31,8 @@ Exclusivamente Base dos Dados (dataset br_inep_avaliacao_alfabetizacao), sem enr
 
 ## 5. Limitações Conhecidas da Fonte
 
-- DF e RR ausentes na tabela uf — limitação identificada na fonte, não resolvida na origem; documentada aqui para transparência analítica.
-- Colunas proporcao_aluno_nivel_0 a _8 majoritariamente nulas em uf/municipio — característica da fonte, não preenchidas artificialmente.
+- DF e RR ausentes na tabela uf, uma limitação da própria fonte de dados.
+- Colunas proporcao_aluno_nivel_0 a _8 majoritariamente nulas em uf/municipio, característica da fonte e não preenchidas artificialmente.
 
 ## 6. FinOps
 
@@ -40,7 +40,7 @@ Exclusivamente Base dos Dados (dataset br_inep_avaliacao_alfabetizacao), sem enr
 
 ## 7. Streaming (Simulado)
 
-A camada de streaming foi projetada com Pub/Sub + Dataflow (citados em ETL Pipelines Aula 3), simulando a chegada periódica de novas medições — a fonte real é estática (atualização anual/bianual), portanto o streaming aqui é uma simulação declarada, não um requisito funcional da fonte de dados.
+A camada de streaming utiliza Pub/Sub e Dataflow, simulando a chegada periódica de novas medições. A fonte real é estática (atualização anual/bianual), portanto o streaming aqui é uma simulação declarada, não um requisito funcional da fonte de dados.
 
 ## 8. Como Reproduzir
 
