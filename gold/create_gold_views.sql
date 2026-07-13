@@ -12,7 +12,10 @@ SELECT
     ELSE 'Abaixo da meta'
   END AS status_meta
 FROM `techchallenge2-afabetizacao.silver.uf`
-WHERE rede = '0';
+WHERE rede = '5';
+-- NOTA: rede='0' (Total) so existe para BA na fonte (limitacao identificada em 13/07).
+-- rede='5' (Publica: Estadual+Municipal) e o recorte mais abrangente, com cobertura
+-- nas 25 UFs disponiveis na base.
 
 CREATE OR REPLACE VIEW `techchallenge2-afabetizacao.gold.vw_evolucao_brasil` AS
 SELECT
