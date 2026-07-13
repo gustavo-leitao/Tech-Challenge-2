@@ -20,7 +20,10 @@ SELECT
   CURRENT_TIMESTAMP() AS data_processamento
 FROM `techchallenge2-afabetizacao.bronze.uf` u
 LEFT JOIN `techchallenge2-afabetizacao.bronze.meta_alfabetizacao_uf` m
-  ON u.ano = m.ano AND u.sigla_uf = m.sigla_uf AND u.rede = m.rede;
+  ON u.ano = m.ano AND u.sigla_uf = m.sigla_uf;
+-- NOTA: rede removido do JOIN. meta_alfabetizacao_uf usa vocabulario textual
+-- ("Publica") incompativel com o vocabulario numerico de uf (0-6, ver dicionario).
+-- A meta e aplicada a todos os recortes de rede de uf.
 
 CREATE OR REPLACE TABLE `techchallenge2-afabetizacao.silver.municipio` AS
 SELECT
@@ -32,7 +35,8 @@ SELECT
   CURRENT_TIMESTAMP() AS data_processamento
 FROM `techchallenge2-afabetizacao.bronze.municipio` mu
 LEFT JOIN `techchallenge2-afabetizacao.bronze.meta_alfabetizacao_municipio` me
-  ON mu.ano = me.ano AND mu.id_municipio = me.id_municipio AND mu.rede = me.rede;
+  ON mu.ano = me.ano AND mu.id_municipio = me.id_municipio;
+-- NOTA: mesma correcao acima, aplicada a meta_alfabetizacao_municipio ("Municipal").
 
 CREATE OR REPLACE TABLE `techchallenge2-afabetizacao.silver.alunos` AS
 SELECT
